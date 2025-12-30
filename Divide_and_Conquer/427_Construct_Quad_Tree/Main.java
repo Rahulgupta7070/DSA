@@ -19,7 +19,7 @@ class Solution {
 
     private Node build(int[][] grid, int x, int y, int n) {
 
-        // Base case: all values same
+        // Base case: all values same hai
         if (isEqual(grid, x, y, n)) {
             return new Node(grid[x][y] == 1, true);
         }
