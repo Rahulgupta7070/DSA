@@ -1,50 +1,30 @@
 // Quad Tree Node definition
 class Node {
-    public boolean val;
-    public boolean isLeaf;
-    public Node topLeft;
-    public Node topRight;
-    public Node bottomLeft;
-    public Node bottomRight;
+    boolean val;
+    boolean isLeaf;
+    Node topLeft, topRight, bottomLeft, bottomRight;
 
-    public Node() {}
-
-    public Node(boolean val, boolean isLeaf) {
+    Node(boolean val, boolean isLeaf) {
         this.val = val;
         this.isLeaf = isLeaf;
-    }
-
-    public Node(boolean val, boolean isLeaf,
-                Node topLeft, Node topRight,
-                Node bottomLeft, Node bottomRight) {
-        this.val = val;
-        this.isLeaf = isLeaf;
-        this.topLeft = topLeft;
-        this.topRight = topRight;
-        this.bottomLeft = bottomLeft;
-        this.bottomRight = bottomRight;
     }
 }
 
-// Solution class
+
 class Solution {
 
     public Node construct(int[][] grid) {
-        int n = grid.length;
-        return build(grid, 0, 0, n);
+        return build(grid, 0, 0, grid.length);
     }
 
-    // Recursive function to build quad tree
     private Node build(int[][] grid, int x, int y, int n) {
 
-        // If all values are same, create leaf node
+        // Base case: all values same
         if (isEqual(grid, x, y, n)) {
             return new Node(grid[x][y] == 1, true);
         }
 
         int half = n / 2;
-
-        // Non-leaf node
         Node root = new Node(true, false);
 
         root.topLeft = build(grid, x, y, half);
@@ -55,7 +35,6 @@ class Solution {
         return root;
     }
 
-    // Check if sub-grid has all same values
     private boolean isEqual(int[][] grid, int x, int y, int n) {
         int val = grid[x][y];
 
@@ -70,8 +49,8 @@ class Solution {
     }
 }
 
-// Optional Main class (for VS Code testing)
-class Main {
+// MAIN class (VS Code run entry point)
+public class Main {
     public static void main(String[] args) {
 
         int[][] grid = {
@@ -82,8 +61,8 @@ class Main {
         };
 
         Solution sol = new Solution();
-        Node root = sol.construct(grid);
+        sol.construct(grid);
 
-        System.out.println("Quad Tree constructed successfully!");
+        System.out.println("Quad Tree constructed successfully");
     }
 }
